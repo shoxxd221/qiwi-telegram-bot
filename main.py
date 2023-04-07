@@ -6,12 +6,12 @@ import python_qiwi
 
 logging.basicConfig(level=logging.INFO)
 
-API_TOKEN = '5803045003:AAFx7bitZ8OxsCnukcfx47AfpRqLHi1QBjY'
+API_TOKEN = 'YOUR TOKEN'
 bot = Bot(API_TOKEN)
 dp = Dispatcher(bot)
 
 
-con = psycopg2.connect(database = 'database', user = 'postgres', password = '123123', host = '127.0.0.1', port = '5432')
+con = psycopg2.connect(database = 'YOUR DATABASE', user = 'YOUR USERNAME', password = 'YOUR PASSWORD', host = 'YOUR HOST', port = 'YOUR PORT')
 cur = con.cursor()
 
 cur.execute('SELECT * FROM telegram_bot')
@@ -96,10 +96,10 @@ async def work_with_qiwi(message: types.Message):
         async def get_payments_info(message: types.Message):
             await message.answer(wallet.payment_history(int(message.from_user.text)))
     @dp.message_handler(commands=['profile'])
-    async def get_profile_info(message:types.Message):
+    async def get_profile_info(message: types.Message):
         await message.answer(wallet.get_profile())
     @dp.message_handler()
-    async def huinya(message: types.Message):
+    async def invalid_command(message: types.Message):
         await message.answer('Такой команды не существует, посмотрите доступные команды в /commands')
 
 
